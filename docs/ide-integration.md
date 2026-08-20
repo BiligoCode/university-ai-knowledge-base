@@ -80,6 +80,8 @@ For per-subject tutors, the second pattern is the most reliable — keep the tut
 
 Create a new GPT. In the **Instructions** field, paste the body of the agent (everything after the YAML frontmatter). Add the `description` from the frontmatter to the GPT's description field. Upload the relevant kb files as knowledge if you want the GPT to operate offline; otherwise let it call out to a file-search action that points back to this repository.
 
+Subject tutors may produce study artifacts meant for `subjects/<slug>/out/`. A custom GPT cannot write into this repository, so it will paste the artifact in chat and tell you the filename to save under that folder.
+
 ---
 
 ## Generic chat (any model)
@@ -101,6 +103,8 @@ subjects/<slug>/agents/<slug>-tutor.md
 For example: `subjects/algorithms/agents/algorithms-tutor.md`.
 
 Wire it into your IDE by referencing the file directly (`@` in Cursor/Claude Code) or by pasting its contents as the system prompt. The tutor is fully self-contained (it includes the topic index, exam patterns and image pointers in its prompt) so you do not need to attach the kb files separately, but doing so makes citations faster and more accurate.
+
+When you ask it to save a study document, it writes the file to `subjects/<slug>/out/`. Ordinary Q&A stays in the chat.
 
 ---
 

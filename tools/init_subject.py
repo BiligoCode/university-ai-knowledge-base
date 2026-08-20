@@ -19,6 +19,8 @@ What it does
       ├── kb/
       │   ├── README.md
       │   └── <category>/  (one per --categories entry)
+      ├── out/
+      │   └── README.md
       └── raw/
           ├── README.md
           └── <category>/  (one per --categories entry)
@@ -81,7 +83,7 @@ def create_subject(name: str, slug: str, categories: list[str], force: bool) -> 
             "Run this script from a fresh clone of the template repo."
         )
 
-    for sub in ("agents", "assets", "kb", "raw"):
+    for sub in ("agents", "assets", "kb", "out", "raw"):
         (subject_dir / sub).mkdir(parents=True, exist_ok=True)
 
     for category in categories:

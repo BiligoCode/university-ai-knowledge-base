@@ -5,7 +5,7 @@ Skeleton files that the pipeline copies (and templates) when a new subject is cr
 | Path | Used by | Purpose |
 |---|---|---|
 | `subject/` | `tools/init_subject.py` | Folder layout copied verbatim under `subjects/<slug>/`. Markdown files inside are rendered with placeholder substitution (`{{SUBJECT_NAME}}`, `{{SUBJECT_SLUG}}`, `{{CATEGORIES_LIST}}`). |
-| `tutor-agent.md` | `tutor-generator` agent | Skeleton for the per-subject tutor agent. The generator fills in `{{TOPIC_INDEX}}`, `{{EXAM_PATTERNS}}`, `{{IMAGE_POINTERS}}` and a few other placeholders. |
+| `tutor-agent.md` | `tutor-generator` agent | Skeleton for the per-subject tutor agent. The generator fills in `{{TOPIC_INDEX}}`, `{{EXAM_PATTERNS}}`, `{{IMAGE_POINTERS}}`, `{{OUT_PATH}}`, and a few other placeholders. |
 
 ## Placeholder reference
 
@@ -15,8 +15,9 @@ Skeleton files that the pipeline copies (and templates) when a new subject is cr
 | `{{SUBJECT_SLUG}}` | Folder name under `subjects/`, e.g. `algorithms`. |
 | `{{CATEGORIES_LIST}}` | Bulleted list of the category subfolders (filled by `init_subject.py`). |
 | `{{PRIMARY_LANGUAGE}}` | `Greek`, `English`, or `Mixed (Greek + English)`. |
-| `{{KB_PATH}}` | `subjects/<slug>/kb/`. |
-| `{{ASSETS_PATH}}` | `subjects/<slug>/assets/`. |
+| `{{KB_PATH}}` | `subjects/<slug>/kb/`. Filled by `tutor-generator`. |
+| `{{ASSETS_PATH}}` | `subjects/<slug>/assets/`. Filled by `tutor-generator`. |
+| `{{OUT_PATH}}` | `subjects/<slug>/out/`. Filled by `tutor-generator`. |
 | `{{TOPIC_INDEX}}` | Markdown table: one row per kb file. Filled by `tutor-generator`. |
 | `{{EXAM_PATTERNS}}` | Bullet list of recurring exam exercise types. Filled by `tutor-generator`. |
 | `{{IMAGE_POINTERS}}` | Topic → canonical image path. Filled by `tutor-generator`. |

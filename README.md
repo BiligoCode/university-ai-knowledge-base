@@ -13,7 +13,7 @@ This template is **IDE-agnostic**: agent definitions are plain Markdown files wi
   - Markdown copies of every PDF with faithful text extraction.
   - Extracted images saved per-PDF and referenced from the Markdown.
   - A curated `assets/` folder where decorative images (logos, portraits, banners) are stripped out.
-  - A per-subject **tutor agent** that knows the material, the file structure, and when to open which image.
+  - A per-subject **tutor agent** that knows the material, the file structure, and when to open which image. When you ask it to save a study document, it writes the file to that subject's `out/` folder.
 - A small set of cross-platform Python scripts (`tools/`) that do the mechanical work.
 - A set of agents (`agents/`) that do the intelligent work (curation, formatting review, tutor authoring).
 
@@ -38,7 +38,7 @@ This template is **IDE-agnostic**: agent definitions are plain Markdown files wi
 
    The initializer will create `subjects/<your-subject>/`, place raw PDFs, convert them to Markdown with images, curate the assets, format the output, and finally generate a tutor agent in `subjects/<your-subject>/agents/`.
 
-5. **Talk to the tutor agent** for that subject. Ask in Greek or English — it answers in whichever language you used last.
+5. **Talk to the tutor agent** for that subject. Ask in Greek or English — it answers in whichever language you used last. Ask it to save a study document and the file lands in `subjects/<your-subject>/out/`.
 
 ---
 
@@ -68,6 +68,7 @@ This template is **IDE-agnostic**: agent definitions are plain Markdown files wi
 │       │   ├── general/
 │       │   ├── slides/
 │       │   └── exams/
+│       ├── out/               # study artifacts the tutor writes on request
 │       └── raw/               # original PDFs, same category layout as kb/
 │           ├── general/
 │           ├── slides/

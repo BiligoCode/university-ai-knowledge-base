@@ -16,7 +16,7 @@ What it does
 * Runs ``format_md.py`` on the whole ``kb/`` afterwards.
 
 This is the safe way to re-run the pipeline after you have added or
-removed PDFs in ``raw/``.
+removed PDFs in ``raw/``. It does not touch ``agents/`` or ``out/``.
 """
 
 from __future__ import annotations

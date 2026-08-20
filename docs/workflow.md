@@ -61,8 +61,9 @@ Open `subjects/algorithms/agents/algorithms-tutor.md` in your IDE and load it as
 - *"Δείξε μου ένα παράδειγμα Dynamic Programming από τα slides."*
 - *"What's the recurrence for Mergesort and how do I solve it with the Master Theorem?"*
 - *"Walk me through exercise 3 of Final-2024."*
+- *"Make me a one-page cheat sheet for Dynamic Programming and save it."*
 
-The tutor will cite specific kb files and only open images when they add value.
+The tutor will cite specific kb files and only open images when they add value. If you ask it to save a cheat sheet, a one-page review, or Anki cards, it writes them to `subjects/algorithms/out/` (or pastes them in chat if the host cannot write files).
 
 ## Updating an existing subject
 
@@ -72,7 +73,7 @@ Drop new PDFs into the appropriate `raw/<category>/` folder and run:
 python tools/regenerate.py --subject algorithms
 ```
 
-Then ask `image-curator` to curate any new images and `tutor-generator` to refresh the tutor (it will read the new kb files and rewrite the topic index).
+Then ask `image-curator` to curate any new images and `tutor-generator` to refresh the tutor (it will read the new kb files and rewrite the topic index). Regenerating does not touch `out/`.
 
 To rebuild from scratch without touching curated images:
 
@@ -82,7 +83,7 @@ python tools/regenerate.py --subject algorithms --keep-assets
 
 ## Removing a subject
 
-Delete `subjects/<slug>/`. The repository does not track any subject-specific state outside that folder.
+Delete `subjects/<slug>/`. The repository does not track any subject-specific state outside that folder. `out/` lives inside the subject folder, so deleting the subject deletes saved artifacts too.
 
 ## Tips
 
@@ -90,3 +91,4 @@ Delete `subjects/<slug>/`. The repository does not track any subject-specific st
 - **Scanned PDFs.** `pypdf` only reads embedded text. If a PDF was scanned without OCR, the resulting Markdown will be mostly empty. Run an OCR pass on the original PDF first (e.g. `ocrmypdf`) and then regenerate.
 - **Languages.** The tutor agent picks language at chat time from the user's message. The kb itself stays in whatever language the PDFs were in.
 - **Working offline.** All scripts are local. The agents only talk to your AI assistant's model.
+- **Study artifacts.** Ask the tutor to save a document (cheat sheet, review, Anki cards). It writes to `subjects/<slug>/out/`. Regenerating the kb does not delete those files.

@@ -49,7 +49,7 @@ Run these steps in order. Do not skip steps; if one fails, stop and report the e
 1. **Confirm the plan.** Show the user a one-screen summary: subject name, slug, categories, mapping of every PDF to its category. Ask for a yes/no confirmation before continuing.
 2. **Create the scaffold.**
    - Run `python tools/init_subject.py --name "<name>" --slug <slug> --categories <categories>`.
-   - Verify the directory tree appeared at `subjects/<slug>/`.
+   - Verify the directory tree appeared at `subjects/<slug>/` with `agents/`, `assets/`, `kb/`, `out/`, and `raw/`.
 3. **Place raw PDFs.** Copy (do not move) each PDF into `subjects/<slug>/raw/<category>/`. Preserve original filenames so re-runs are reproducible.
 4. **Run the conversion pipeline.**
    - Run `python tools/regenerate.py --subject <slug>`.
@@ -65,7 +65,7 @@ Run these steps in order. Do not skip steps; if one fails, stop and report the e
     - subject path,
     - number of PDFs ingested per category,
     - number of images kept versus deleted,
-    - the path to the new tutor agent and one example prompt the user can try.
+    - the path to the new tutor agent, that study artifacts go in `subjects/<slug>/out/`, and one example prompt the user can try.
 
 **Cursor users:** The root `.cursor/agents/` symlink already points to `agents/`, which contains the pipeline agents. Subject tutors live under `subjects/<slug>/agents/` instead, so they are not automatically visible in the root `.cursor`. The user can reference the tutor file directly (e.g. `@subjects/algorithms/agents/algorithms-tutor.md`) or create an additional symlink if they want it in the Cursor agent picker.
 
@@ -105,6 +105,7 @@ Use this when the subject already exists and the user wants to add one or more n
 
 - **Never overwrite** an existing subject folder in Bootstrap mode. If `subjects/<slug>/` already exists, switch to Add mode or ask the user whether to use a different slug or pass `--force` to `init_subject.py`.
 - **Never edit raw PDFs.** They are the source of truth; the pipeline can always rebuild from them.
+- **Never write study artifacts into `kb/`.** Those belong in `subjects/<slug>/out/`.
 - **Preserve filenames** in `raw/`. The pipeline slugifies stems for the Markdown side, but the original PDF name must remain in `raw/` so it is easy to map back.
 - **Cross-platform paths.** Always use forward slashes in Markdown references. The scripts already do this; if you write paths in chat, do the same.
 - **Be transparent.** Print each shell command before running it so the user sees exactly what is happening.

@@ -23,4 +23,4 @@ If you add a PDF to `raw/`, regenerate from the repository root:
 python tools/regenerate.py --subject {{SUBJECT_SLUG}}
 ```
 
-This wipes `kb/` (preserving READMEs) and `assets/` (unless `--keep-assets` is passed) and rebuilds from `raw/`.
+This wipes `kb/` (preserving READMEs) and `assets/` (unless `--keep-assets` is passed) and rebuilds from `raw/`. It does not touch `out/`.

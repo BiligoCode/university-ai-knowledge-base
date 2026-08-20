@@ -22,7 +22,7 @@ Keeping these two layers separate means the same template works in any IDE: the 
            │ runs
            ▼
 ┌─────────────────────────┐
-│ tools/init_subject.py   │  →  subjects/<slug>/{agents,assets,kb,raw}/
+│ tools/init_subject.py   │  →  subjects/<slug>/{agents,assets,kb,out,raw}/
 └──────────┬──────────────┘
            │ user/agent copies PDFs into raw/<category>/
            ▼
@@ -72,6 +72,8 @@ subjects/<slug>/
 │   ├── general/       # one .md per PDF in raw/general/
 │   ├── slides/        # one .md per PDF in raw/slides/
 │   └── exams/         # one .md per PDF in raw/exams/
+├── out/
+│   └── README.md      # tutor writes study artifacts here on request
 └── raw/
     ├── README.md
     ├── general/       # original PDFs
@@ -93,6 +95,7 @@ Categories are configurable. The defaults (`general`, `slides`, `exams`) cover m
 | Heading promotion, code-fencing | `md-formatter` agent | Needs context awareness. |
 | Tutor authoring | `tutor-generator` agent | Needs to read the kb and synthesise a coherent index. |
 | Day-to-day Q&A | per-subject `<slug>-tutor.md` | The end product. |
+| Study artifacts (cheat sheets, Anki, reviews) | per-subject `out/` | The tutor writes here on request. Kept separate from the curated kb. |
 
 ## Adding capabilities
 
@@ -100,6 +103,6 @@ The cleanest way to extend the template is to add a new agent under `agents/` an
 
 Common extensions:
 
-- A **flashcard generator** agent that reads the tutor and produces Anki-format cards into `subjects/<slug>/flashcards.csv`.
+- A **flashcard generator** agent that reads the tutor and produces Anki-format cards into `subjects/<slug>/out/`.
 - A **practice quizzer** agent that runs an oral-exam loop using past exam questions.
 - An **OCR fallback script** that handles scanned PDFs (`pypdf` only reads embedded text). A wrapper around `pytesseract` would slot into `tools/` and be called from `pdf_to_md.py` when `extract_text()` returns nothing.
